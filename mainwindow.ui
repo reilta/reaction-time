@@ -61,7 +61,7 @@
      </font>
     </property>
     <property name="text">
-     <string>TIME REACTION GAME</string>
+     <string>REACTION TIME GAME</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
@@ -290,7 +290,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -372,7 +372,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>590</x>
