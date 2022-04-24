@@ -23,6 +23,13 @@ public:
     void keyPressEvent(QKeyEvent *k);
     int cor;
     int score = 0;
+    char tecla = 0;
+    int cont = 1;
+    float tmili = 0.0;
+    float tmili_final = 0.0;
+    float sum = 0.0;
+    float average = 0.0;
+    struct timeval tempo_inicial, tempo_final;
     ~MainWindow();
 
 public slots:
