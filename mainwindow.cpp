@@ -26,6 +26,10 @@ void MainWindow::paintEvent(QPaintEvent *e){
     QPainter painter(this);
     QBrush brush;
     int x_location,y_location;
+    int x_bigger = 690;
+    int x_smaller = 21;
+    int y_bigger = 330;
+    int y_smaller = 61;
 
     // habilita o anti-aliasing para que as
     // linhas sejam desenhadas sem serrilhados
@@ -60,14 +64,8 @@ void MainWindow::paintEvent(QPaintEvent *e){
         painter.setBrush(brush);
     }
 
-    int x_bigger = 690;
-    int x_smaller = 21;
-    int y_bigger = 330;
-    int y_smaller = 61;
-
     x_location = rand()%(x_bigger-x_smaller+1) + x_smaller;
     y_location = rand()%(y_bigger-y_smaller+1) + y_smaller;
-
 
     painter.drawEllipse(x_location,y_location,90,90);
 
