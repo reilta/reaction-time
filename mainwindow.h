@@ -21,18 +21,19 @@ public:
     MainWindow(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *e);
     void keyPressEvent(QKeyEvent *k);
-    int cor;
+    int color;
     int score = 0;
-    char tecla = 0;
+    char key = 0;
     int cont = 1;
     float tmili = 0.0;
     float tmili_final = 0.0;
     float sum = 0.0;
     float average = 0.0;
-    struct timeval tempo_inicial, tempo_final;
+    struct timeval init_time, final_time;
     ~MainWindow();
 
 public slots:
+    void reset();
     void encerra();
 
 private:
