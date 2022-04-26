@@ -66,15 +66,16 @@ void MainWindow::paintEvent(QPaintEvent *e){
     // desenha um retangulo
     painter.drawRect(20,60,761, 361);
 
-    //brush.setColor(QColor(0,0,255));
-    //painter.setBrush(brush);
-
     color = rand()%4;
 
     vcolor[aux] = color;
 
     cout << "color atual: " << vcolor[aux] << endl;
     cout << "color anterior: " << vcolor[aux-1] << endl;
+
+    if(vcolor[aux] == vcolor[aux-1]){
+        vcolor[aux] = vcolor[aux-2];
+    }
 
     if(vcolor[aux] == 0 && vcolor[aux-1] != 0){
         brush.setColor(QColor(0,0,255));
@@ -85,7 +86,7 @@ void MainWindow::paintEvent(QPaintEvent *e){
     }else if(vcolor[aux] == 2 && vcolor[aux-1] != 2 ){
         brush.setColor(QColor(255,0,0));
         painter.setBrush(brush);
-    }else if(vcolor[aux] == 3 && vcolor[aux-1] != 3 ) {
+    } else if(vcolor[aux] == 3 && vcolor[aux-1] != 3 ) {
         brush.setColor(QColor(255,255,0));
         painter.setBrush(brush);
     }
@@ -99,8 +100,6 @@ void MainWindow::paintEvent(QPaintEvent *e){
     QWidget::paintEvent(e);
 
     aux++;
-
-
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *k)
