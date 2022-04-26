@@ -63,32 +63,42 @@ void MainWindow::paintEvent(QPaintEvent *e){
     painter.setBrush(brush);
     painter.drawRect(20,60,761, 361);
 
-    brush.setColor(QColor(0,0,255));
-    painter.setBrush(brush);
-
     color = rand()%4;
 
-    if(color == 0){
+    vcolor[aux] = color;
+
+    cout << "color atual: " << vcolor[aux] << endl;
+    cout << "color anterior: " << vcolor[aux-1] << endl;
+
+    if(vcolor[aux] == vcolor[aux-1]){
+        vcolor[aux] = vcolor[aux-2];
+    }
+
+    if(vcolor[aux] == 0 && vcolor[aux-1] != 0){
         brush.setColor(QColor(0,0,255));
         painter.setBrush(brush);
-    }else if(color == 1){
+    }else if(vcolor[aux] == 1 && vcolor[aux-1] != 1){
         brush.setColor(QColor(0,255,0));
         painter.setBrush(brush);
-    }else if(color == 2){
+    }else if(vcolor[aux] == 2 && vcolor[aux-1] != 2 ){
         brush.setColor(QColor(255,0,0));
         painter.setBrush(brush);
-    }else if(color == 3){
+    } else if(vcolor[aux] == 3 && vcolor[aux-1] != 3 ) {
         brush.setColor(QColor(255,255,0));
         painter.setBrush(brush);
+
     }
 
     x_location = rand()%(x_bigger-x_smaller+1) + x_smaller;
     y_location = rand()%(y_bigger-y_smaller+1) + y_smaller;
 
     painter.drawEllipse(x_location,y_location,90,90);
+
     gettimeofday(&init_time, NULL);
 
     QWidget::paintEvent(e);
+
+    aux++;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *k)
@@ -123,6 +133,10 @@ void MainWindow::keyPressEvent(QKeyEvent *k)
     c.setNum(average);
     ui->textBrowser_average->setText(c);
     QWidget ::update();
+
+    time_random = rand()%3;
+    sleep(time_random);
+
 }
 
 void MainWindow::encerra()

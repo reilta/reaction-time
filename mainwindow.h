@@ -26,6 +26,9 @@ public:
     int fail = 0;
     char key = 0;
     int cont = 1;
+    int vcolor [100];
+    int aux = 0;
+    int time_random = 0;
     float tmili = 0.0;
     float tsec = 0.0;
     float sum = 0.0;
