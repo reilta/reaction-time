@@ -27,6 +27,7 @@ public:
     int cont = 1;
     int vcolor [100];
     int aux = 0;
+    int time_random = 0;
     float tmili = 0.0;
     float tmili_final = 0.0;
     float sum = 0.0;
