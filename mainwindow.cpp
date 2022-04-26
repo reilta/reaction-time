@@ -72,6 +72,8 @@ void MainWindow::paintEvent(QPaintEvent *e){
 
     if(vcolor[aux] == vcolor[aux-1]){
         vcolor[aux] = vcolor[aux-2];
+        brush.setColor(QColor(0,0,255));
+        painter.setBrush(brush);
     }
 
     if(vcolor[aux] == 0 && vcolor[aux-1] != 0){
