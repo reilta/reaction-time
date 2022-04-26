@@ -25,6 +25,8 @@ public:
     int score = 0;
     char key = 0;
     int cont = 1;
+    int vcolor [100];
+    int aux = 0;
     float tmili = 0.0;
     float tmili_final = 0.0;
     float sum = 0.0;
