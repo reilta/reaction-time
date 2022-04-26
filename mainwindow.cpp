@@ -33,8 +33,10 @@ void MainWindow::reset()
     sum = 0;
     average = 0;
     cont = 1;
+    fail = 0;
 
     ui->lcdNumber->display(score);
+    ui->lcdNumber_2->display(fail);
 
     QString c;
     c.setNum(sum);
@@ -53,17 +55,12 @@ void MainWindow::paintEvent(QPaintEvent *e){
     int y_bigger = 330;
     int y_smaller = 61;
 
-    // habilita o anti-aliasing para que as
-    // linhas sejam desenhadas sem serrilhados
     painter.setRenderHint(QPainter::Antialiasing);
 
-    // define as props do preenchimento
     brush.setColor(QColor(255,255,255));
     brush.setStyle(Qt::SolidPattern);
 
-    // comunica as mudancas ao objeto painter
     painter.setBrush(brush);
-    // desenha um retangulo
     painter.drawRect(20,60,761, 361);
 
     brush.setColor(QColor(0,0,255));
@@ -97,6 +94,7 @@ void MainWindow::paintEvent(QPaintEvent *e){
 void MainWindow::keyPressEvent(QKeyEvent *k)
 {
     key = k->key();
+    gettimeofday(&final_time, NULL);
     if(key == 'w' || key == 'W' && color == 2){
         score+=1;
     }else if(key == 'a' || key == 'A' && color == 1){
@@ -106,19 +104,19 @@ void MainWindow::keyPressEvent(QKeyEvent *k)
     }else if(key == 's' || key == 'S' && color == 3){
         score+=1;
     }else{
-        score-=1;
+        fail+=1;
     }
 
-    gettimeofday(&final_time, NULL);
-    tmili = (int) (1000 * (final_time.tv_sec - init_time.tv_sec) + (final_time.tv_usec - init_time.tv_usec) / 1000); // para transformar em milissegundos
-    tmili_final = (float) tmili/1000;
+    tmili = (int) (1000 * (final_time.tv_sec - init_time.tv_sec) + (final_time.tv_usec - init_time.tv_usec) / 1000);
+    tsec = (float) tmili/1000;
 
     QString b;
-    b.setNum(tmili_final);
+    b.setNum(tsec);
     ui->textBrowser_time->setText(b);
 
     ui->lcdNumber->display(score);
-    sum += tmili_final;
+    ui->lcdNumber_2->display(fail);
+    sum += tsec;
     average = sum/cont++;
 
     QString c;

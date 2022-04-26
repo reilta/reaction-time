@@ -23,10 +23,11 @@ public:
     void keyPressEvent(QKeyEvent *k);
     int color;
     int score = 0;
+    int fail = 0;
     char key = 0;
     int cont = 1;
     float tmili = 0.0;
-    float tmili_final = 0.0;
+    float tsec = 0.0;
     float sum = 0.0;
     float average = 0.0;
     struct timeval init_time, final_time;
