@@ -147,8 +147,6 @@ void MainWindow::keyPressEvent(QKeyEvent *k)
     ui->textBrowser_average->setText(b);
     QWidget ::update();
 
-    time_random = rand()%3;
-    sleep(time_random);
 }
 
 void MainWindow::encerra()
