@@ -30,13 +30,13 @@ MainWindow::~MainWindow()
 void MainWindow::reset()
 {
     score = 0;
+    fail = 0;
     sum = 0;
     average = 0;
     cont = 1;
-    fail = 0;
 
     ui->lcdNumber->display(score);
-    ui->lcdNumber_2->display(fail);
+    ui->lcdNumber_fail->display(fail);
 
     QString c;
     c.setNum(sum);
@@ -61,33 +61,45 @@ void MainWindow::paintEvent(QPaintEvent *e){
     brush.setStyle(Qt::SolidPattern);
 
     painter.setBrush(brush);
-    painter.drawRect(20,60,761, 361);
+    painter.drawRect(20,60,761,361);
 
     color = rand()%4;
-
     vcolor[aux] = color;
 
-    cout << "color atual: " << vcolor[aux] << endl;
-    cout << "color anterior: " << vcolor[aux-1] << endl;
+    if(aux == 0){
+        if(vcolor[aux] == 0){
+            brush.setColor(QColor(0,0,255));
+            painter.setBrush(brush);
+        }else if(vcolor[aux] == 1){
+            brush.setColor(QColor(0,255,0));
+            painter.setBrush(brush);
+        }else if(vcolor[aux] == 2){
+            brush.setColor(QColor(255,0,0));
+            painter.setBrush(brush);
+        } else if(vcolor[aux] == 3) {
+            brush.setColor(QColor(255,255,0));
+            painter.setBrush(brush);
+        }
+    }else{
+        if(vcolor[aux] == vcolor[aux-1]){
+            vcolor[aux] = vcolor[aux-2];
+            brush.setColor(QColor(0,0,255));
+            painter.setBrush(brush);
+        }
 
-    if(vcolor[aux] == vcolor[aux-1]){
-        brush.setColor(QColor(0,0,255));
-        painter.setBrush(brush);
-    }
-
-    if(vcolor[aux] == 0 && vcolor[aux-1] != 0){
-        brush.setColor(QColor(0,0,255));
-        painter.setBrush(brush);
-    }else if(vcolor[aux] == 1 && vcolor[aux-1] != 1){
-        brush.setColor(QColor(0,255,0));
-        painter.setBrush(brush);
-    }else if(vcolor[aux] == 2 && vcolor[aux-1] != 2 ){
-        brush.setColor(QColor(255,0,0));
-        painter.setBrush(brush);
-    } else if(vcolor[aux] == 3 && vcolor[aux-1] != 3 ) {
-        brush.setColor(QColor(255,255,0));
-        painter.setBrush(brush);
-
+        if(vcolor[aux] == 0 && vcolor[aux-1] != 0){
+            brush.setColor(QColor(0,0,255));
+            painter.setBrush(brush);
+        }else if(vcolor[aux] == 1 && vcolor[aux-1] != 1){
+            brush.setColor(QColor(0,255,0));
+            painter.setBrush(brush);
+        }else if(vcolor[aux] == 2 && vcolor[aux-1] != 2 ){
+            brush.setColor(QColor(255,0,0));
+            painter.setBrush(brush);
+        } else if(vcolor[aux] == 3 && vcolor[aux-1] != 3 ) {
+            brush.setColor(QColor(255,255,0));
+            painter.setBrush(brush);
+        }
     }
 
     x_location = rand()%(x_bigger-x_smaller+1) + x_smaller;
@@ -118,6 +130,9 @@ void MainWindow::keyPressEvent(QKeyEvent *k)
         fail+=1;
     }
 
+    ui->lcdNumber->display(score);
+    ui->lcdNumber_fail->display(fail);
+
     tmili = (int) (1000 * (final_time.tv_sec - init_time.tv_sec) + (final_time.tv_usec - init_time.tv_usec) / 1000);
     tsec = (float) tmili/1000;
 
@@ -125,23 +140,18 @@ void MainWindow::keyPressEvent(QKeyEvent *k)
     b.setNum(tsec);
     ui->textBrowser_time->setText(b);
 
-    ui->lcdNumber->display(score);
-    ui->lcdNumber_2->display(fail);
     sum += tsec;
     average = sum/cont++;
 
-    QString c;
-    c.setNum(average);
-    ui->textBrowser_average->setText(c);
+    b.setNum(average);
+    ui->textBrowser_average->setText(b);
     QWidget ::update();
 
     time_random = rand()%3;
     sleep(time_random);
-
 }
 
 void MainWindow::encerra()
 {
     exit(0);
 }
-
